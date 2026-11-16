@@ -1,35 +1,18 @@
 package ru.gorodnichev_ilya.TaskFlow.repository;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import ru.gorodnichev_ilya.TaskFlow.entity.Task;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-@Repository
-public class TaskRepository implements CrudRepository<Task, Long> {
-    private final List<Task> tasks = new ArrayList<>();
+public interface TaskRepository extends CrudRepository<Task, Long> {
+    List<Task> findByStatusAndPriority(String status, Integer priority);
 
-    @Override
-    public void save(Task task) {
-        tasks.add(task);
-    }
+    List<Task> findByPriorityBetween(Integer min, Integer max);
 
-    @Override
-    public List<Task> findAll() {
-        return new ArrayList<>(tasks);
-    }
+    @Query("SELECT t FROM Task t WHERE t.assignee.fullName = :fullName")
+    List<Task> findTasksByAssigneeFullName(@Param("fullName") String fullName);
 
-    @Override
-    public Optional<Task> findById(Long id) {
-        return tasks.stream()
-                .filter(t -> t.getId() != null && t.getId().equals(id))
-                .findFirst();
-    }
-
-    @Override
-    public void deleteById(Long id) {
-        tasks.removeIf(t -> t.getId() != null && t.getId().equals(id));
-    }
 }
