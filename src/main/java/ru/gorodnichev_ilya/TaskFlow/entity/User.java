@@ -15,9 +15,6 @@ public class User {
     private String fullName;
     private String role;
 
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
-    private List<Project> projects = new ArrayList<>();
-
     @OneToMany(mappedBy = "assignee")
     private List<Task> tasks = new ArrayList<>();
 
@@ -34,9 +31,7 @@ public class User {
     public void setFullName(String fullName) { this.fullName = fullName; }
     public String getRole() { return role; }
     public void setRole(String role) { this.role = role; }
-    public List<Project> getProjects() { return projects; }
-    public void setProjects(List<Project> projects) { this.projects = projects; }
-    public List<Task> getTasks() { return tasks; }
+  public List<Task> getTasks() { return tasks; }
     public void setTasks(List<Task> tasks) { this.tasks = tasks; }
     public List<Notification> getNotifications() { return notifications; }
     public void setNotifications(List<Notification> notifications) { this.notifications = notifications; }
