@@ -5,10 +5,12 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
+import org.springframework.stereotype.Repository;
 import ru.gorodnichev_ilya.TaskFlow.entity.Task;
 
 import java.util.List;
 
+@Repository
 public class TaskCriteriaRepositoryImpl implements TaskCriteriaRepository {
     @PersistenceContext
     private EntityManager entityManager;
