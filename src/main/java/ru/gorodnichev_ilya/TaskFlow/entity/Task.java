@@ -14,6 +14,15 @@ public class Task {
 
     }
 
+    public Task(Long id, String title, String description, String status, Integer priority) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.status = status;
+        this.priority = priority;
+        this.createdAt = LocalDateTime.now(); // автоматически ставим дату создания
+    }
+
     public Long getId() {
         return id;
     }
