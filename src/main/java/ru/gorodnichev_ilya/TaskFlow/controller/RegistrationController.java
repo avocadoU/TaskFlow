@@ -19,6 +19,11 @@ public class RegistrationController {
         this.passwordEncoder = passwordEncoder;
     }
 
+    @GetMapping("/login")
+    public String login() {
+        return "login"; // Возвращает шаблон login.html из папки templates
+    }
+
     @GetMapping("/registration")
     public String registration() {
         return "registration";
