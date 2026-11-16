@@ -1,12 +1,14 @@
 package ru.gorodnichev_ilya.TaskFlow.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ru.gorodnichev_ilya.TaskFlow.entity.Task;
 import ru.gorodnichev_ilya.TaskFlow.repository.TaskRepository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class TaskServiceImpl implements TaskService {
 
     private final TaskRepository taskRepository;
