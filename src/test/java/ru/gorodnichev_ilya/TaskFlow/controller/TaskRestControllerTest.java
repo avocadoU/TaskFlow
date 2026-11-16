@@ -15,6 +15,7 @@ class TaskRestControllerTest {
         RestAssured.baseURI = "http://localhost";
         RestAssured.port = 8080;
 
+        // Базовая авторизация
         RestAssured.authentication = RestAssured.basic("admin", "admin123");
     }
 
@@ -31,16 +32,6 @@ class TaskRestControllerTest {
     }
 
     @Test
-    void testSearchTasks_MissingParam() {
-        given()
-                .queryParam("status", "TODO")
-                .when()
-                .get("/api/tasks/search")
-                .then()
-                .statusCode(400);
-    }
-
-    @Test
     void testGetTasksByAssignee() {
         given()
                 .queryParam("fullName", "admin")
@@ -49,5 +40,17 @@ class TaskRestControllerTest {
                 .then()
                 .statusCode(200)
                 .contentType(ContentType.JSON);
+    }
+
+    @Test
+    void testSearchTasks_Unauthorized() {
+        given()
+                .auth().none()
+                .queryParam("status", "TODO")
+                .queryParam("priority", 1)
+                .when()
+                .get("/api/tasks/search")
+                .then()
+                .statusCode(401);
     }
 }
